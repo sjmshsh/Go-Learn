@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package service;
+
+option go_package="../service";
+
+message ProductRequest {
+  int32 prod_id = 1;
+}
+
+message Content {
+  string msg = 1;
+}
+
+message ProductResponse {
+  int32 prod_stock = 1;
+}
+
+service ProdService {
+  rpc GetProductStock(ProductRequest) returns (ProductResponse);
+
+  // 客户端流
+  rpc UpdateProductStockClientStream(stream ProductRequest) returns (ProductResponse);
+
+  rpc SayHelloServerStream(stream ProductRequest) returns (stream ProductResponse);
+}
