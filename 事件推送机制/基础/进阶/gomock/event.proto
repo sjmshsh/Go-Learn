@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "./event";
+
+package event;
+
+message Event {
+  string message = 1;
+}
+
+message EventSource {
+  string name = 1;
+}
+
+message Empty {}
+
+service EventService {
+  rpc Subscribe(EventSource) returns (stream Event);
+  rpc Unsubscribe(EventSource) returns (Empty);
+}
